@@ -34,4 +34,9 @@ public class Member {
     public void returnBook(Book book) {
         borrowedBooks.remove(book);
     }
+    
+ // Method to return a book
+    public void burnBook(Book book) {
+        borrowedBooks.remove(book);
+    }
 }
