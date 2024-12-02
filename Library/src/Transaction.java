@@ -1,20 +1,25 @@
+package Library;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 public class Transaction {
-//Make singleton form
+//Make singleton form task 2.1
 	// private static instance
 	private static Transaction transaction;
 
 	// private constructor
-	private Transaction() {
+	Transaction() {
 	}
 
 	// get Transaction instance method
-	public synchronized static Transaction getTraInstance() {
+	public synchronized static Transaction getTransaction() {
 		if (transaction == null) {
 			transaction = new Transaction();
 		}
+		return transaction;
 	}
 
 	// Singleton completed
@@ -26,6 +31,7 @@ public class Transaction {
 			String transactionDetails = getCurrentDateTime() + " - Borrowing: " + member.getName() + " borrowed "
 					+ book.getTitle();
 			System.out.println(transactionDetails);
+			saveTransaction(transactionDetails);
 			return true;
 		} else {
 			System.out.println("The book is not available.");
@@ -41,6 +47,7 @@ public class Transaction {
 			String transactionDetails = getCurrentDateTime() + " - Returning: " + member.getName() + " returned "
 					+ book.getTitle();
 			System.out.println(transactionDetails);
+			saveTransaction(transactionDetails);
 		} else {
 			System.out.println("This book was not borrowed by the member.");
 		}
@@ -51,10 +58,29 @@ public class Transaction {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(new Date());
 	}
-	
-	private boolean getSomeFunction() {
-		return true;
+//File writer for task 2.2
+	public void saveTransaction(String transactionDetails) {
+		try (FileWriter writer = new FileWriter("transactions.txt", true)) { // 'true' for appending
+            writer.write(transactionDetails + "\n");
+            System.out.println("Data written to file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the file.");
+            e.printStackTrace();
+        }
 	}
-	
+
+	public static void displayTransactionHistory() 
+	{
+		//simple file reader
+		try (BufferedReader br = new BufferedReader(new FileReader("transactions.txt"))) {
+            String l;
+            while ((l = br.readLine()) != null) {
+                System.out.println(l+"\n"+"------------------------------");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the file.");
+            e.printStackTrace();
+        }
 	}
+
 }

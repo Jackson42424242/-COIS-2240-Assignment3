@@ -1,3 +1,4 @@
+package Library;
 import java.util.Scanner;
 
 public class LibraryManagement {
@@ -76,7 +77,9 @@ public class LibraryManagement {
                     Book book = library.findBookById(bookId);
 
                     if (member != null && book != null) {
-                        Transaction.borrowBook(book, member);
+                        Transaction transaction = null;
+
+						transaction.borrowBook(book, member);
                     } else {
                         System.out.println("Invalid member or book ID.");
                     }
@@ -94,7 +97,9 @@ public class LibraryManagement {
                     book = library.findBookById(bookId);
 
                     if (member != null && book != null) {
-                        Transaction.returnBook(book, member);
+                        Transaction transaction = null;
+
+                        transaction.returnBook(book, member);
                     } else {
                         System.out.println("Invalid member or book ID.");
                     }

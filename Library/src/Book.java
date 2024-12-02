@@ -1,7 +1,9 @@
+package Library;
+
 public class Book {
-    private int id;
-    private String title;
-    private boolean available;
+    public int id;
+    public String title;
+    public boolean available;
 
     public Book(int id, String title) {
         this.id = id;

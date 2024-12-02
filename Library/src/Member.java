@@ -1,3 +1,4 @@
+package Library;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +36,5 @@ public class Member {
         borrowedBooks.remove(book);
     }
     
- // Method to return a book
-    public void burnBook(Book book) {
-        borrowedBooks.remove(book);
-    }
+   
 }
