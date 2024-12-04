@@ -6,13 +6,15 @@ public class Book {
     public int id;
     public String title;
     public boolean available;
-
-    public Book(int id, String title) {
+public Exception invalidIDException = new Exception("Invalid Book ID");
+    public Book(int id, String title) throws Exception {
         this.id = id;
         this.title = title;
+        if(isValidId(id)==true) {
         this.available = true;
     }
-
+        else {throw invalidIDException;}
+    }
     // Getter methods
     public int getId() {
         return id;

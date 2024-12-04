@@ -1,0 +1,4 @@
+
+module Library {
+	requires junit;
+}
