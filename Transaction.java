@@ -11,10 +11,11 @@ public class Transaction {
 	private static Transaction transaction;
 
 	// constructor
-	Transaction(int memberId, int bookId) {
+	private Transaction(int memberId, int bookId) {
 	}
 
 	// get Transaction instance method
+	//only this makes an instance of Transaction, which is to be overwritten anyway
 	public synchronized static Transaction getTransaction() {
 		if (transaction == null) {
 			transaction = new Transaction(1,1);
