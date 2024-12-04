@@ -7,10 +7,11 @@ import static org.junit.Assert.*;
 public class LibraryManagementTest {
 	public Library library;
 
-
 	@Before
 
-	public void setUp() {
+	public void setUp() throws Exception {
+		
+
 		library = new Library();
 	}
 
@@ -38,4 +39,22 @@ public class LibraryManagementTest {
             fail("Unexpected exception: " + e.getMessage());
         }
     }
+	   @Test
+	    public void testBorrowReturn() throws Exception {
+		   Book book = new Book(100,"Test book");
+			Member member = new Member(1111,"Test member");
+	        // Borrow
+	        assertTrue("Book should be borrowed successfully", Transaction.getTransaction().borrowBook(book, member));
+
+	        // Check book availability 
+	        assertFalse("Book should no longer be available", book.isAvailable());
+	        assertTrue("Member should have borrowed the book", member.getBorrowedBooks().contains(book));
+
+	        // Return
+	        Transaction.getTransaction().returnBook(book, member);
+
+	        // Verify that the book is available again
+	        assertTrue("Book should be available after return", book.isAvailable());
+	        assertFalse("Member should no longer have the book", member.getBorrowedBooks().contains(book));
+	    }
 }
